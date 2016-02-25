@@ -1,0 +1,229 @@
+/* 
+ * styles.css
+ *
+ * @author: Chopping Block (choppinblock.com)
+ *
+ */
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	font-family: 'Vollkorn', Garamond, serif;
+	color: #787878;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+i{
+	font-style: italic;
+    font-weight: 200;
+
+}
+
+
+/* Your styles go here */
+
+h1, h2, h3, h4, h5, h6{
+	font-family:'Oswald', Helvetica, Arial, sans-serif; 
+	
+}
+
+h1{
+	font-size: 2em;
+	color:#37424A;
+	text-align: center;
+	line-height: 2em;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+a {
+    color: #b84ab4;
+    text-decoration: none;
+}
+
+.first-graph:first-letter { 
+	float: left; 
+	color: #37424A; 
+	font-size: 2.5em; 
+	line-height: 1em; 
+	padding-top: 4px; 
+	padding-right: 10px; 
+	padding-left: 3px; 
+	font-family: 'Vollkorn',Georgia, serif; 
+}
+
+
+ p{
+    font-family: 'Vollkorn', Garamond, serif;
+    font-size: 16px;
+    line-height: 1.5em;
+    color: #393939;
+    padding-bottom: 1.5em;
+
+}
+
+.wrap{
+	position: absolute;
+	width:100%;
+}
+
+
+.content{
+	width:50%;
+	margin:0 auto;
+	max-width:600px;
+	text-align: justify;
+}
+
+
+
+
+
+.button {
+	font-family:'Oswald', Helvetica, Arial, sans-serif; 
+	color: #fff ;
+    background-color:  #7c7c7d;
+    font-weight: normal;
+	display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid #7c7c7d;
+    border-radius: 4px;
+}
+
+.button:hover {
+  background: #888;
+  text-decoration: none;
+  
+}
+
+
+.mobile{
+	display:none;
+}
+
+.desktop{
+	display:block;
+}
+
+.legend{
+	width:100%;
+}
+
+.legend-text{
+	 float:left;
+}
+
+.legend-box{
+    padding-right: 10px;
+    float: left;
+    width: 46%;
+}
+
+.footnote{
+	font-size: 0.8em;
+    color: #888;
+    line-height: 1.5em;
+    clear: both;
+}
+
+
+
+.intro-icon {
+    text-align: center;
+    margin: 25px 0px 25px 0;
+    font-size: 1.5em;
+
+}
+
+.intro-icon i{
+	color:#f563f1;
+}
+
+
+@media (max-width:480px) {
+	.content{
+		width:90%;
+	}
+	.mobile{
+		display:block;
+	}
+	.desktop{
+		display:none;
+	}
+	p{
+		font-size:14px;
+		padding-bottom: 1em;
+	}
+	.button-container{
+		text-align: center;
+	}
+
+	h1 {
+	    font-size: 1.5em;
+	    line-height: 1em;
+	    margin-bottom: 15px;
+	    margin-top: 15px;
+	}
+
+
+	
+
+}
+
