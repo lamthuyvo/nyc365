@@ -173,7 +173,7 @@ a {
 .legend-box{
     padding-right: 10px;
     float: left;
-    width: 46%;
+    width: 30%;
 }
 
 .footnote{
@@ -222,8 +222,87 @@ a {
 	    margin-top: 15px;
 	}
 
-
-	
-
 }
 
+/* chart styles*/
+.y.axis line,
+.y.axis path,
+.x.axis line,
+.x.axis path {
+  fill: none;
+  stroke: #ccc;
+}
+
+.y.axis path{
+	stroke:#fff;
+}
+
+.axis text {
+	fill:#888;
+	font-size: 14px;
+}
+
+.chart-box {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.circle{
+	border-radius: 50%;
+    width: 5px;
+    height: 5px;
+    float: left;
+    margin-top: 6px;
+    margin-right: 3px;
+}
+
+/*colors*/
+
+.yellow1{color:#342a03;}
+.yellow2{color:#9d800a;}
+.yellow3{color:#dbbc3d;}
+.yellow4{color:#e4cc6d;}
+.yellow5{color:#f5edce;}
+
+.magenta1{color:#3d183c;}
+.magenta2{color:#b84ab4;}
+.magenta3{color:#f563f1;}
+.magenta4{color:#f9a1f6;}
+.magenta5{color:#fcdffb;}
+
+.green1{color: #003d2d;}
+.green2{color: #01b988;}
+.green3{color: #01f7b6;}
+.green4{color: #99fbe1;}
+.green5{color: #cbfdf0;}
+
+.blue1{color: #00333f;}
+.blue2{color: #009abe;}
+.blue3{color: #00ceff;}
+.blue4{color: #65e1ff;}
+.blue5{color: #cbf4ff;}
+
+
+.yellow1-background{background-color: #342a03;}
+.yellow2-background{background-color: #9d800a;}
+.yellow3-background{background-color: #dbbc3d;}
+.yellow4-background{background-color: #e4cc6d;}
+.yellow5-background{background-color: #f5edce;}
+
+.magenta1-background{background-color:#3d183c;}
+.magenta2-background{background-color:#b84ab4;}
+.magenta3-background{background-color:#f563f1;}
+.magenta4-background{background-color:#f9a1f6;}
+.magenta5-background{background-color:#fcdffb;}
+
+.green1-background{background-color: #003d2d;}
+.green2-background{background-color: #01b988;}
+.green3-background{background-color: #01f7b6;}
+.green4-background{background-color: #99fbe1;}
+.green5-background{background-color: #cbfdf0;}
+
+.blue1-background{background-color: #00333f;}
+.blue2-background{background-color: #009abe;}
+.blue3-background{background-color: #00ceff;}
+.blue4-background{background-color: #65e1ff;}
+.blue5-background{background-color: #cbf4ff;}
