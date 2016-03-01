@@ -125,23 +125,6 @@ $( document ).ready(function() {
 		   .data(ambionicData)
 		   .enter()
 		   .append("circle")
-		   .attr("cx", function(d){
-		   	return Math.random() * Math.floor(Math.random()*200)-100;
-		   })
-		   .attr("cy", function(d){
-		   	return Math.random() * Math.floor(Math.random()*200)-100;
-		   })
-			   	.transition()
-			   	.duration(80)
-			   	.delay(function(d, i) { return i * 10; })
-		   .attr("cx", function(d) {
-		   		return xScale(d.days_elapsed);
-		   })
-		   .attr("cy", function(d) {
-		   		return yScale(d.time_fraction);
-		   })
-		   .attr("r", 5)
-		   .attr("opacity", 0.5)
 		   .attr("fill", function(d){
 		   		if (d.emotion === "negative"){
 		   			return unhappyColor
@@ -150,7 +133,26 @@ $( document ).ready(function() {
 		   		} else{
 		   			return mixedColor
 		   		}
-		   });
+		   })
+		   .attr("r", 0)
+			   	.transition()
+			   	.duration(100)
+			   	.delay(function(d, i) { return i * 10; })
+			   	.each("end", function(){
+
+			   	})
+			.attr("r", 7)
+			   	.transition()
+			   	.duration(500)
+			   	.delay(function(d, i) { return i * 10 + 500; })
+		   .attr("r", 5)
+		   .attr("cx", function(d) {
+		   		return xScale(d.days_elapsed);
+		   })
+		   .attr("cy", function(d) {
+		   		return yScale(d.time_fraction);
+		   })
+		   .attr("opacity", 0.5);
 
 	}
 
