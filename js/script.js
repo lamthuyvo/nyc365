@@ -9,34 +9,11 @@ $( document ).ready(function() {
 	//Width, height and 
 	var w = parseInt(d3.select('#chart-container').style('width'), 10);;
 	var h = windowHeight - $('#chart-intro').height() -100;
-	console.log(windowHeight - $('#chart-box').height())
+	
 	var padding = 50;
 	var margin=  {top: 30, right: 0, bottom: 30, left: 0};
 
-	d3.select(window).on('resize', resize); 
 
-	function resize() {
-	    // update width
-	    w = parseInt(d3.select('#chart-container').style('width'), 10);
-	    w = w - padding;
-
-	    // reset x range
-	    var xScale = d3.scale.linear()
-						 .domain([0, d3.max(ambionicData, function(d) { return d[0]; })])
-						 .range([padding, w - padding]);
-	    yScale = d3.scale.linear()
-						 .domain([0, d3.max(ambionicData, function(d) { return d[1]; })])
-						 .range([h - padding, padding]);
-
-	    // do the actual resize...
-	    var circles = d3.selectAll("circles");
-	    circles.attr("cx", function(d) {
-	   		return xScale(d[0]);
-	   	})
-
-	    xAxis.scale(xScale);
-
-	}
 
 	var happyColor = '#f563f1',
 		mixedColor = '#dbbc3d',
@@ -125,6 +102,12 @@ $( document ).ready(function() {
 		   .data(ambionicData)
 		   .enter()
 		   .append("circle")
+		   .attr("cx", function(d) {
+		   		return xScale(d.days_elapsed);
+		   })
+		   .attr("cy", function(d) {
+		   		return yScale(d.time_fraction);
+		   })
 		   .attr("fill", function(d){
 		   		if (d.emotion === "negative"){
 		   			return unhappyColor
@@ -136,26 +119,43 @@ $( document ).ready(function() {
 		   })
 		   .attr("r", 0)
 			   	.transition()
-			   	.duration(100)
+			   	.duration(200)
 			   	.delay(function(d, i) { return i * 10; })
-			   	.each("end", function(){
 
-			   	})
 			.attr("r", 7)
 			   	.transition()
-			   	.duration(500)
-			   	.delay(function(d, i) { return i * 10 + 500; })
+			   	.duration(100)
+			   	.delay(function(d, i) { return i * 10 + 200; })
 		   .attr("r", 5)
-		   .attr("cx", function(d) {
-		   		return xScale(d.days_elapsed);
-		   })
-		   .attr("cy", function(d) {
-		   		return yScale(d.time_fraction);
-		   })
 		   .attr("opacity", 0.5);
 
 	}
 
+	
+	
+	function resize() {
+	    // update width
+	    w = parseInt(d3.select('#chart-container').style('width'), 10);
+	    w = w - padding;
+
+	    // reset x range
+	    var xScale = d3.scale.linear()
+						 .domain([0,366])
+						 .range([padding, w - padding]);
+	    yScale = d3.scale.linear()
+						 .domain([0, 24])
+						 .range([h - padding, padding]);
+
+	    // do the actual resize...
+	    var circles = d3.selectAll("circles");
+	    circles.attr("cx", function(d) {
+	   		return xScale(d[0]);
+	   	})
+
+	    xAxis.scale(xScale);
+
+	}
+	$(window).on("resize", resize);
 		
 	$('#start').on("click", function(){
 		$('html,body').animate({

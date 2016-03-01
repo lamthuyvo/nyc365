@@ -249,11 +249,11 @@ a {
 
 .circle{
 	border-radius: 50%;
-    width: 5px;
-    height: 5px;
+    width: 10px;
+    height: 10px;
     float: left;
-    margin-top: 6px;
-    margin-right: 3px;
+    margin-top: 2px;
+    margin-right: 5px;
 }
 
 /*colors*/
