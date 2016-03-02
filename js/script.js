@@ -117,15 +117,24 @@ $( document ).ready(function() {
 		   			return mixedColor
 		   		}
 		   })
+		   .attr("class", function(d){
+		   		if (d.emotion === "negative"){
+		   			return "negative"
+		   		} else if (d.emotion === "positive"){
+		   			return "positive"
+		   		} else{
+		   			return "mixed"
+		   		}
+		   })
 		   .attr("r", 0)
 			   	.transition()
-			   	.duration(200)
+			   	.duration(20)
 			   	.delay(function(d, i) { return i * 10; })
 
 			.attr("r", 7)
 			   	.transition()
-			   	.duration(100)
-			   	.delay(function(d, i) { return i * 10 + 200; })
+			   	.duration(10)
+			   	.delay(function(d, i) { return i * 10 + 20; })
 		   .attr("r", 5)
 		   .attr("opacity", 0.5);
 
@@ -135,7 +144,7 @@ $( document ).ready(function() {
 	
 	function resize() {
 	    // update width
-	    w = parseInt(d3.select('#chart-container').style('width'), 10);
+	    w = d3.select('#chart-container').style('width');
 	    w = w - padding;
 
 	    // reset x range
@@ -155,15 +164,73 @@ $( document ).ready(function() {
 	    xAxis.scale(xScale);
 
 	}
+
 	$(window).on("resize", resize);
+
+	// maybe make this toggle swith???
+
+	$('#positive').on("click", function(){
+		var newRadius;
+		if (d3.selectAll(".positive").attr("r") == 5){
+			d3.selectAll(".positive")
+				.transition()
+				.duration(500)
+				.attr("r", 0)
+				.attr("opacity", 0.5);
+		} else{
+			d3.selectAll(".positive")
+				.transition()
+				.duration(500)
+				.attr("r", 5)
+				.attr("opacity", 0.5);
+		}
+
+	});
+
+	$('#negative').on("click", function(){
+		var newRadius;
+		if (d3.selectAll(".negative").attr("r") == 5){
+			d3.selectAll(".negative")
+				.transition()
+				.duration(500)
+				.attr("r", 0)
+				.attr("opacity", 0.5);
+		} else{
+			d3.selectAll(".negative")
+				.transition()
+				.duration(500)
+				.attr("r", 5)
+				.attr("opacity", 0.5);
+		}
+
+	});
+
+	$('#mixed').on("click", function(){
+		var newRadius;
+		if (d3.selectAll(".mixed").attr("r") == 5){
+			d3.selectAll(".mixed")
+				.transition()
+				.duration(500)
+				.attr("r", 0)
+				.attr("opacity", 0.5);
+		} else{
+			d3.selectAll(".mixed")
+				.transition()
+				.duration(500)
+				.attr("r", 5)
+				.attr("opacity", 0.5);
+		}
+
+	});
+
+	
 		
 	$('#start').on("click", function(){
 		$('html,body').animate({
 	        scrollTop: $('#chart1').offset().top,
 	    }, 800, 'easeOutExpo');
 	    makeGraphic();
-	})
-
+	});
 
 	// make waypoints
 
