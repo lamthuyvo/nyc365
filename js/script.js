@@ -8,7 +8,7 @@ $( document ).ready(function() {
 
 	//Width, height and 
 	var w = parseInt(d3.select('#chart-container').style('width'), 10);;
-	var h = windowHeight - $('#chart-intro').height() -100;
+	var h = windowHeight - $('#chart-intro').height();
 	
 	var padding = 50;
 	var margin=  {top: 30, right: 0, bottom: 30, left: 0};
@@ -69,8 +69,6 @@ $( document ).ready(function() {
 	                 		}
 				   });
 
-
-	
 	// Create SVG element
 	var svg = d3.select('#chart-container')
 				.append("svg")
@@ -78,6 +76,12 @@ $( document ).ready(function() {
 					width: w,
 					height: h
 				});
+
+	// Define tooltip
+	var tooltip = d3.select("body")
+			.append("div")
+			.attr("class", "tooltip tooltip-noarrow")
+			.style("opacity", 0);
 
 	//Create X axis
 	svg.append("g")
@@ -91,10 +95,13 @@ $( document ).ready(function() {
 	    .attr("transform", "translate(" + padding + ",0)")
 	    .call(yAxis);
 
-
+	
 	//Y-axis label
-
 	var YAxisLines = d3.selectAll('.y');
+
+
+
+
 
 	// Create circles
 	function makeGraphic (){
@@ -108,6 +115,7 @@ $( document ).ready(function() {
 		   .attr("cy", function(d) {
 		   		return yScale(d.time_fraction);
 		   })
+		   .attr("stroke", "#fff")
 		   .attr("fill", function(d){
 		   		if (d.emotion === "negative"){
 		   			return unhappyColor
@@ -117,15 +125,7 @@ $( document ).ready(function() {
 		   			return mixedColor
 		   		}
 		   })
-		   .attr("class", function(d){
-		   		if (d.emotion === "negative"){
-		   			return "negative"
-		   		} else if (d.emotion === "positive"){
-		   			return "positive"
-		   		} else{
-		   			return "mixed"
-		   		}
-		   })
+		   .attr("class", function(d){ return d.emotion + " " + d.storyCategory})
 		   .attr("r", 0)
 			   	.transition()
 			   	.duration(20)
@@ -137,6 +137,53 @@ $( document ).ready(function() {
 			   	.delay(function(d, i) { return i * 10 + 20; })
 		   .attr("r", 5)
 		   .attr("opacity", 0.5);
+
+		svg.selectAll('.hovercircles')
+			.data(ambionicData)
+		   	.enter()
+		   	.append("circle")
+		   	.attr("cx", function(d) {
+		   		return xScale(d.days_elapsed);
+		    })
+		    .attr("cy", function(d) {
+		   		return yScale(d.time_fraction);
+		    })
+			.attr("opacity",0)
+			// .attr("fill",'none')
+			.attr("r", 10)
+			.attr("class", "hovercircles")
+			.on("mouseover", function(d) {
+	      		tooltip.html('<div class="legend">'+
+	      			'<table style="width:100%;">'+
+	      			'<tr><td><div class="legend-box" style="background-color:#bb2b77; float: left;"></div> Song:</td><td style="text-align:right"> '+ d.song +'</td></tr>'+
+	      			'<tr><td><div class="legend-box" style="background-color:#95cbee; float: left;"></div> Artist:</td><td style="text-align:right"> '+ d.artist +'</td></tr>'+
+	      			'</table></div>')
+	            tooltip.style("opacity", 1)
+	                .style("position", "absolute");
+	            if (d3.event.pageX > (w/2)){
+	        		tooltip.style("left", (d3.event.pageX)-200 + "px")
+        			.style("top", (d3.event.pageY) + "px")
+        			.append("rect");
+	            }else{
+
+	            	tooltip.style("left", (d3.event.pageX) + "px")
+        			.style("top", (d3.event.pageY) + "px")
+
+	            }
+			})
+			.on("mouseout", function(d) {
+			    tooltip
+			        .style("opacity", 0);
+
+			})
+			.attr("cx", function(d) {
+		   		return xScale(d.days_elapsed);
+		   })
+		   .attr("cy", function(d) {
+		   		return yScale(d.time_fraction);
+		   })
+		   .attr("r", 5)
+
 
 	}
 
@@ -169,66 +216,70 @@ $( document ).ready(function() {
 
 	// maybe make this toggle swith???
 
-	$('#positive').on("click", function(){
-		var newRadius;
-		if (d3.selectAll(".positive").attr("r") == 5){
-			d3.selectAll(".positive")
-				.transition()
-				.duration(500)
-				.attr("r", 0)
-				.attr("opacity", 0.5);
-		} else{
-			d3.selectAll(".positive")
-				.transition()
-				.duration(500)
-				.attr("r", 5)
-				.attr("opacity", 0.5);
-		}
+	// $('#positive').on("click", function(){
+	// 	var newRadius;
+	// 	if (d3.selectAll(".positive").attr("r") == 5){
+	// 		d3.selectAll(".positive")
+	// 			.transition()
+	// 			.duration(500)
+	// 			.attr("r", 0)
+	// 			.attr("opacity", 0.5);
+	// 	} else{
+	// 		d3.selectAll(".positive")
+	// 			.transition()
+	// 			.duration(500)
+	// 			.attr("r", 5)
+	// 			.attr("opacity", 0.5);
+	// 	}
 
-	});
+	// });
 
-	$('#negative').on("click", function(){
-		var newRadius;
-		if (d3.selectAll(".negative").attr("r") == 5){
-			d3.selectAll(".negative")
-				.transition()
-				.duration(500)
-				.attr("r", 0)
-				.attr("opacity", 0.5);
-		} else{
-			d3.selectAll(".negative")
-				.transition()
-				.duration(500)
-				.attr("r", 5)
-				.attr("opacity", 0.5);
-		}
+	// $('#negative').on("click", function(){
+	// 	var newRadius;
+	// 	if (d3.selectAll(".negative").attr("r") == 5){
+	// 		d3.selectAll(".negative")
+	// 			.transition()
+	// 			.duration(500)
+	// 			.attr("r", 0)
+	// 			.attr("opacity", 0.5);
+	// 	} else{
+	// 		d3.selectAll(".negative")
+	// 			.transition()
+	// 			.duration(500)
+	// 			.attr("r", 5)
+	// 			.attr("opacity", 0.5);
+	// 	}
 
-	});
+	// });
 
-	$('#mixed').on("click", function(){
-		var newRadius;
-		if (d3.selectAll(".mixed").attr("r") == 5){
-			d3.selectAll(".mixed")
-				.transition()
-				.duration(500)
-				.attr("r", 0)
-				.attr("opacity", 0.5);
-		} else{
-			d3.selectAll(".mixed")
-				.transition()
-				.duration(500)
-				.attr("r", 5)
-				.attr("opacity", 0.5);
-		}
+	// $('#mixed').on("click", function(){
+	// 	var newRadius;
+	// 	if (d3.selectAll(".mixed").attr("r") == 5){
+	// 		d3.selectAll(".mixed")
+	// 			.transition()
+	// 			.duration(500)
+	// 			.attr("r", 0)
+	// 			.attr("opacity", 0.5);
+	// 	} else{
+	// 		d3.selectAll(".mixed")
+	// 			.transition()
+	// 			.duration(500)
+	// 			.attr("r", 5)
+	// 			.attr("opacity", 0.5);
+	// 	}
 
-	});
+	// });
 
 	
 		
 	$('#start').on("click", function(){
-		$('html,body').animate({
-	        scrollTop: $('#chart1').offset().top,
-	    }, 800, 'easeOutExpo');
+		// $('html,body').animate({
+	 	//    scrollTop: $('#chart1').offset().top,
+	 	//    }, 800, 'easeOutExpo');
+	
+		$('.chart-box').animate({"opacity":1}, 500);
+		$('#intro').css("display", "none")
+
 	    makeGraphic();
 	});
 
