@@ -77,11 +77,6 @@ $( document ).ready(function() {
 					height: h
 				});
 
-	// Define tooltip
-	var tooltip = d3.select("body")
-			.append("div")
-			.attr("class", "tooltip tooltip-noarrow")
-			.style("opacity", 0);
 
 	//Create X axis
 	svg.append("g")
@@ -98,9 +93,6 @@ $( document ).ready(function() {
 	
 	//Y-axis label
 	var YAxisLines = d3.selectAll('.y');
-
-
-
 
 
 	// Create circles
@@ -150,13 +142,28 @@ $( document ).ready(function() {
 		    })
 			.attr("opacity",0)
 			// .attr("fill",'none')
-			.attr("r", 10)
+			.attr("r", 15)
 			.attr("class", "hovercircles")
 			.on("mouseover", function(d) {
+				if (d.emotion === "negative"){
+		   			var color = unhappyColor
+		   		} else if (d.emotion === "positive"){
+		   			var color = happyColor
+		   		} else{
+		   			var color = mixedColor
+		   		}
+
+				// Define tooltip
+				var tooltip = d3.select("body")
+						.append("div")
+						.attr("class", "tooltip tooltip-noarrow")
+						.style("opacity", 0);
+
 	      		tooltip.html('<div class="legend">'+
 	      			'<table style="width:100%;">'+
-	      			'<tr><td><div class="legend-box" style="background-color:#bb2b77; float: left;"></div> Song:</td><td style="text-align:right"> '+ d.song +'</td></tr>'+
-	      			'<tr><td><div class="legend-box" style="background-color:#95cbee; float: left;"></div> Artist:</td><td style="text-align:right"> '+ d.artist +'</td></tr>'+
+	      			'<tr><td>Song:</td><td style="text-align:right">'+ d.song +'</td></tr>'+
+	      			'<tr><td></div> Artist:</td><td style="text-align:right"> '+ d.artist +'</td></tr>'+
+	      			'<tr><td>Emotion:</td><td style="text-align:right">' + d.emotion+'<div class="circle" style="background-color:'+ color +'; margin-left:10px; float: right;"></div></td></tr>'+
 	      			'</table></div>')
 	            tooltip.style("opacity", 1)
 	                .style("position", "absolute");
@@ -172,8 +179,8 @@ $( document ).ready(function() {
 	            }
 			})
 			.on("mouseout", function(d) {
-			    tooltip
-			        .style("opacity", 0);
+			    d3.selectAll('.tooltip')
+			        .remove();
 
 			})
 			.attr("cx", function(d) {
@@ -183,8 +190,6 @@ $( document ).ready(function() {
 		   		return yScale(d.time_fraction);
 		   })
 		   .attr("r", 5)
-
-
 	}
 
 	
@@ -214,7 +219,74 @@ $( document ).ready(function() {
 
 	$(window).on("resize", resize);
 
-	// maybe make this toggle swith???
+	// On scroll
+
+	// setup: make functions repeated for the following
+
+	// fadein of text
+
+	function textFade (){
+
+		// destroy old view
+
+		// fade in next item of text
+
+
+
+	}
+
+
+
+	// setup waypoints
+
+
+	// section 1: graphic explanation 
+
+	// makeGraphic();
+
+	// section 2: highlight happy, mixed and sad
+
+
+	// section 3: highlight songs that are about city 
+
+	// section 4: show breakup dots and highlight dots (move view and show )
+
+	// section 5: ariana grande
+
+	// make soundcite
+	
+	function danceParty(){
+		// turn background dark
+
+		// move dots down
+
+		// make repeat dancing thing (or use https://www.bignerdranch.com/blog/music-visualization-with-d3-js/)
+	}
+
+	// section 6: jameel 
+
+	// section 7: dancing on my own
+
+
+	// make exit view of all dots
+	
+
+
+		
+	$('#start').on("click", function(){
+		// $('html,body').animate({
+	 	//    scrollTop: $('#chart1').offset().top,
+	 	//    }, 800, 'easeOutExpo');
+	
+		$('.chart-box').animate({"opacity":1}, 500);
+		$('#intro').css("display", "none")
+
+	    makeGraphic();
+	});
+
+	// make waypoints
+
+
 
 	// $('#positive').on("click", function(){
 	// 	var newRadius;
@@ -271,20 +343,6 @@ $( document ).ready(function() {
 	// });
 
 	
-		
-	$('#start').on("click", function(){
-		// $('html,body').animate({
-	 	//    scrollTop: $('#chart1').offset().top,
-	 	//    }, 800, 'easeOutExpo');
-	
-		$('.chart-box').animate({"opacity":1}, 500);
-		$('#intro').css("display", "none")
-
-	    makeGraphic();
-	});
-
-	// make waypoints
-
 
 
 	
