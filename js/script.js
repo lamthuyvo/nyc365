@@ -2,6 +2,9 @@ $( document ).ready(function() {
 	var windowWidth = $(window).innerWidth();
 		windowHeight = $(window).innerHeight();
 
+	$('.intro-icon').addClass("animated bounce");
+	$('#start h1').addClass("animated bounce");
+
 	// make sections a height of window
 	$('.section').height(windowHeight);
 
@@ -199,27 +202,54 @@ $( document ).ready(function() {
 	}
 
 	
-	
-	
-
-	// On scroll
-
-	// setup: make functions repeated for the following
-
-	// fadein of text
-
-
-	// setup waypoints
-	
 
 	// section 1: graphic explanation 
 
-	// makeGraphic();
+	$('#start').waypoint(function(direction) {
+		  	if (direction === 'down') {
+		  		$('.chart-box').animate({"opacity":1}, 500);
+
+			    makeGraphic();
+
+			    $('#start').fadeOut()
+	
+		  	} else if (direction === 'up'){
+		  		$('#start').fadeIn()
+		  	}
+		}, {
+		  	offset: '0px'
+	})
+
 
 	// section 2: highlight happy, mixed and sad
+	$('#chart-chapter2').waypoint(function(direction) {
+		  	if (direction === 'down') {
+		  	
+
+			    $('#chart-chapter2').animate({"opacity": 1})
+	
+		  	} else if (direction === 'up'){
+		  		$('#chart-chapter2').animate({"opacity": 0})
+		  	}
+		}, {
+		  	offset: windowHeight/2+'px'
+	})
 
 
 	// section 3: highlight songs that are about city 
+
+	$('#chart-chapter3').waypoint(function(direction) {
+		  	if (direction === 'down') {
+
+			    $('#chart-chapter3').animate({"opacity": 1})
+	
+		  	} else if (direction === 'up'){
+		  		$('#chart-chapter3').animate({"opacity": 0})
+		  	}
+		}, {
+		  	offset: windowHeight/2+'px'
+	})
+
 
 	// section 4: show breakup dots and highlight dots (move view and show )
 
@@ -240,31 +270,9 @@ $( document ).ready(function() {
 	// section 7: dancing on my own
 
 
-	var chapterArray = ['']
-
-	$('#start').waypoint(function(direction) {
-		  	if (direction === 'down') {
-		  		$('.chart-box').animate({"opacity":1}, 500);
-
-			    makeGraphic();
-
-			    $('#start').fadeOut()
-	
-		  	} else if (direction === 'up'){
-		  		$('#start').fadeIn()
-		  	}
-		}, {
-		  	offset: '50px'
-		})
-
-		
-	$('#start').on("click", function(){
-		$('.chart-box').animate({"opacity":1}, 500);
-
-	    makeGraphic();
 	
 		
-	});
+	
 
 	// make waypoints
 

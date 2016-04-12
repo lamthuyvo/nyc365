@@ -387,3 +387,13 @@ a {
 #chart1 {
     position: fixed;
 }
+
+#chart-chapter2,
+#chart-chapter3,
+#chart-chapter4
+#chart-chapter5,
+#chart-chapter6
+#chart-chapter7,
+#chart-chapter8{
+	opacity:0;
+}
