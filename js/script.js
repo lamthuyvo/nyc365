@@ -5,10 +5,16 @@ $( document ).ready(function() {
 	// make sections a height of window
 	$('.section').height(windowHeight);
 
+	var firstContentHeight = $('#start').height();
+
+	$('#section1').css("margin-top", (windowHeight-firstContentHeight)/2)
+
 
 	//Width, height and 
-	var w = parseInt(d3.select('#chart-container').style('width'), 10);;
-	var h = windowHeight - $('#chart-intro').height();
+	// var w = parseInt(d3.select('#chart-container').style('width'), 10);
+	var w = windowWidth * 0.95;
+	// var h = windowHeight - $('#chart-intro').height();
+	var h = windowHeight;
 	
 	var padding = 50;
 	var margin=  {top: 30, right: 0, bottom: 30, left: 0};
@@ -194,30 +200,7 @@ $( document ).ready(function() {
 
 	
 	
-	function resize() {
-	    // update width
-	    w = d3.select('#chart-container').style('width');
-	    w = w - padding;
-
-	    // reset x range
-	    var xScale = d3.scale.linear()
-						 .domain([0,366])
-						 .range([padding, w - padding]);
-	    yScale = d3.scale.linear()
-						 .domain([0, 24])
-						 .range([h - padding, padding]);
-
-	    // do the actual resize...
-	    var circles = d3.selectAll("circles");
-	    circles.attr("cx", function(d) {
-	   		return xScale(d[0]);
-	   	})
-
-	    xAxis.scale(xScale);
-
-	}
-
-	$(window).on("resize", resize);
+	
 
 	// On scroll
 
@@ -225,20 +208,9 @@ $( document ).ready(function() {
 
 	// fadein of text
 
-	function textFade (){
-
-		// destroy old view
-
-		// fade in next item of text
-
-
-
-	}
-
-
 
 	// setup waypoints
-
+	
 
 	// section 1: graphic explanation 
 
@@ -268,20 +240,30 @@ $( document ).ready(function() {
 	// section 7: dancing on my own
 
 
-	// make exit view of all dots
-	
+	var chapterArray = ['']
 
+	$('#start').waypoint(function(direction) {
+		  	if (direction === 'down') {
+		  		$('.chart-box').animate({"opacity":1}, 500);
+
+			    makeGraphic();
+
+			    $('#start').fadeOut()
+	
+		  	} else if (direction === 'up'){
+		  		$('#start').fadeIn()
+		  	}
+		}, {
+		  	offset: '50px'
+		})
 
 		
 	$('#start').on("click", function(){
-		// $('html,body').animate({
-	 	//    scrollTop: $('#chart1').offset().top,
-	 	//    }, 800, 'easeOutExpo');
-	
 		$('.chart-box').animate({"opacity":1}, 500);
-		$('#intro').css("display", "none")
 
 	    makeGraphic();
+	
+		
 	});
 
 	// make waypoints

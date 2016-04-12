@@ -187,13 +187,15 @@ a {
     /* max-width: 600px; */
     text-align: justify;
     position: relative;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
 }
 
 .section{
 	position:relative;
+	pointer-events: none;
 }
-
-
 
 
 .button {
@@ -341,7 +343,7 @@ a {
 }
 
 .chart-box {
-    width: 90%;
+    width: 95%;
     margin: 0 auto;
 }
 
@@ -352,6 +354,7 @@ a {
     float: left;
     margin-top: 2px;
     margin-right: 5px;
+    display: inline-block;
 }
 
 .hover{
@@ -380,3 +383,7 @@ a {
 	opacity:0;
 }
 
+
+#chart1 {
+    position: fixed;
+}
