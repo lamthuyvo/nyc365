@@ -232,7 +232,7 @@ $( document ).ready(function() {
 		  		$('#chart-chapter2').animate({"opacity": 0})
 		  	}
 		}, {
-		  	offset: windowHeight/2+'px'
+		  	offset: 2*(windowHeight/3)+'px'
 	})
 
 
