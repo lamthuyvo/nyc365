@@ -116,44 +116,7 @@ $( document ).ready(function() {
 		   .attr("cy", function(d) {
 		   		return yScale(d.time_fraction);
 		   })
-		   .attr("stroke", "#fff")
-		   .attr("fill", function(d){
-		   		if (d.emotion === "negative"){
-		   			return unhappyColor
-		   		} else if (d.emotion === "positive"){
-		   			return happyColor
-		   		} else{
-		   			return mixedColor
-		   		}
-		   })
-		   .attr("class", function(d){ return d.emotion + " " + d.storyCategory})
-		   .attr("r", 0)
-			   	.transition()
-			   	.duration(20)
-			   	.delay(function(d, i) { return i * 10; })
-
-			.attr("r", 7)
-			   	.transition()
-			   	.duration(10)
-			   	.delay(function(d, i) { return i * 10 + 20; })
-		   .attr("r", 5)
-		   .attr("opacity", 0.5);
-
-		svg.selectAll('.hovercircles')
-			.data(ambionicData)
-		   	.enter()
-		   	.append("circle")
-		   	.attr("cx", function(d) {
-		   		return xScale(d.days_elapsed);
-		    })
-		    .attr("cy", function(d) {
-		   		return yScale(d.time_fraction);
-		    })
-			.attr("opacity",0)
-			// .attr("fill",'none')
-			.attr("r", 15)
-			.attr("class", "hovercircles")
-			.on("mouseover", function(d) {
+		   .on("mouseover", function(d) {
 				if (d.emotion === "negative"){
 		   			var color = unhappyColor
 		   		} else if (d.emotion === "positive"){
@@ -192,13 +155,30 @@ $( document ).ready(function() {
 			        .remove();
 
 			})
-			.attr("cx", function(d) {
-		   		return xScale(d.days_elapsed);
+		   .attr("stroke", "#fff")
+		   .attr("fill", function(d){
+		   		if (d.emotion === "negative"){
+		   			return unhappyColor
+		   		} else if (d.emotion === "positive"){
+		   			return happyColor
+		   		} else{
+		   			return mixedColor
+		   		}
 		   })
-		   .attr("cy", function(d) {
-		   		return yScale(d.time_fraction);
-		   })
+		   .attr("class", function(d){ return d.emotion + " " + d.storyCategory})
+		   .attr("r", 0)
+			   	.transition()
+			   	.duration(5)
+			   	.delay(function(d, i) { return i * 10; })
+
+			.attr("r", 7)
+			   	.transition()
+			   	.duration(5)
+			   	.delay(function(d, i) { return i * 10 + 20; })
 		   .attr("r", 5)
+		   .attr("opacity", 0.5);
+
+		
 	}
 
 	
@@ -224,7 +204,8 @@ $( document ).ready(function() {
 	// section 2: highlight happy, mixed and sad
 	$('#chart-chapter2').waypoint(function(direction) {
 		  	if (direction === 'down') {
-		  	
+
+
 
 			    $('#chart-chapter2').animate({"opacity": 1})
 	
@@ -240,11 +221,46 @@ $( document ).ready(function() {
 
 	$('#chart-chapter3').waypoint(function(direction) {
 		  	if (direction === 'down') {
+		  		d3.selectAll('circle.work')
+		  			.transition()
+		  			.duration(500)
+		  			.delay(function(d, i) { return i * 10; })
+		  			.attr("cy", -300)
+		  			.attr("opacity", 0)
+		  			.attr("r", 0);
+
+		  		d3.selectAll('circle.relationship')
+		  			.transition()
+		  			.duration(500)
+		  			.delay(function(d, i) { return i * 10; })
+		  			 .attr("cy", -300)
+		  			.attr("opacity", 0)
+		  			.attr("r", 0);
 
 			    $('#chart-chapter3').animate({"opacity": 1})
 	
 		  	} else if (direction === 'up'){
 		  		$('#chart-chapter3').animate({"opacity": 0})
+
+		  		d3.selectAll('circle.work')
+		  			.transition()
+		  			.duration(500)
+		  			.delay(function(d, i) { return i * 10; })
+		  			.attr("opacity", 0.5)
+		  			.attr("cy", function(d) {
+				   		return yScale(d.time_fraction);
+				   	})
+		  			.attr("r", 5);
+
+		  			d3.selectAll('circle.relationship')
+		  			.transition()
+		  			.duration(500)
+		  			.delay(function(d, i) { return i * 10; })
+				  	.attr("cy", function(d) {
+				   		return yScale(d.time_fraction);
+				   	})
+		  			.attr("opacity", 0.5)
+		  			.attr("r", 5);
 		  	}
 		}, {
 		  	offset: windowHeight/2+'px'
@@ -252,6 +268,57 @@ $( document ).ready(function() {
 
 
 	// section 4: show breakup dots and highlight dots (move view and show )
+	// breakup was 10/20/2014 - day 241 after coming to NYC
+
+	$('#chart-chapter4').waypoint(function(direction) {
+		  	if (direction === 'down') {
+		  		d3.selectAll('circle.nyc')
+		  			.transition()
+		  			.duration(500)
+		  			.delay(function(d, i) { return i * 10; })
+		  			.attr("opacity", 0.5)
+		  			.attr("cy",-300)
+		  			.attr("r", 5);
+		  		
+
+		  		d3.selectAll('circle.relationship')
+		  			.transition()
+		  			.duration(500)
+		  			.delay(function(d, i) { return i * 10; })
+		  			.attr("cy", function(d){
+		  			 	return yScale(d.time_fraction);
+		  			 })
+		  			.attr("opacity", 0.5)
+		  			.attr("r", 5);
+
+			    $('#chart-chapter3').animate({"opacity": 1})
+	
+		  	} else if (direction === 'up'){
+		  		$('#chart-chapter3').animate({"opacity": 0})
+
+		  			d3.selectAll('circle.nyc')
+		  			.transition()
+		  			.duration(500)
+		  			.delay(function(d, i) { return i * 10; })
+		  			.attr("opacity", 0.5)
+		  			.attr("cy", function(d) {
+				   		return yScale(d.time_fraction);
+				   	})
+		  			.attr("r", 5);
+
+		  			d3.selectAll('circle.relationship')
+		  			.transition()
+		  			.duration(500)
+		  			.delay(function(d, i) { return i * 10; })
+				  	.attr("cy", function(d) {
+				   		return yScale(d.time_fraction);
+				   	})
+		  			.attr("opacity", 0.5)
+		  			.attr("r", 5);
+		  	}
+		}, {
+		  	offset: windowHeight/2+'px'
+	})
 
 	// section 5: ariana grande
 
