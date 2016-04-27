@@ -334,7 +334,7 @@ a {
 }
 
 .y.axis path{
-	stroke:#fff;
+	stroke:none;
 }
 
 .axis text {

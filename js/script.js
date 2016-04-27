@@ -291,10 +291,14 @@ $( document ).ready(function() {
 		  			.attr("opacity", 0.5)
 		  			.attr("r", 5);
 
-			    $('#chart-chapter3').animate({"opacity": 1})
+		  		// disappear old axis
+
+		  		// change scale
+
+			    $('#chart-chapter4').animate({"opacity": 1})
 	
 		  	} else if (direction === 'up'){
-		  		$('#chart-chapter3').animate({"opacity": 0})
+		  		$('#chart-chapter4').animate({"opacity": 0})
 
 		  			d3.selectAll('circle.nyc')
 		  			.transition()
@@ -320,7 +324,23 @@ $( document ).ready(function() {
 		  	offset: windowHeight/2+'px'
 	})
 
-	// section 5: ariana grande
+	// section 5: Healing dance party!
+
+	$('#chart-chapter5').waypoint(function(direction) {
+		  	if (direction === 'down') {
+		  		// turn of the lights
+		  		$('body').animate({"background-color": "#000"}, 1000)
+		  		
+			    $('#chart-chapter5').animate({"opacity": 1})
+	
+		  	} else if (direction === 'up'){
+		  		$('#chart-chapter5').animate({"opacity": 0})
+		  		$('body').animate({"background-color": "#FFF"}, 500)
+		  			
+		  	}
+		}, {
+		  	offset: windowHeight/2+'px'
+	})
 
 	// make soundcite
 	
