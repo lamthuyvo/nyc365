@@ -45,14 +45,14 @@ $( document ).ready(function() {
                   .scale(xScale)
                   .orient("bottom")
                   .ticks(5)
-                  .tickValues([0, 183, 366])
+                  .tickValues([0, 183, 365])
                   .tickFormat(function(d,i){
 					  	if (d == 0){
 					  		return "arrival in NYC";
 					  	} else if (d === 183){
 					  		// return d + " days";	
 					  		return "first six months";						  		
-					  	} else if (d === 366)
+					  	} else if (d === 365)
 					  		return "1st year"
 					  });//setting rough number of ticks
 
@@ -169,12 +169,12 @@ $( document ).ready(function() {
 		   .attr("r", 0)
 			   	.transition()
 			   	.duration(5)
-			   	.delay(function(d, i) { return i * 10; })
+			   	.delay(function(d, i) { return i * 5; })
 
 			.attr("r", 7)
 			   	.transition()
 			   	.duration(5)
-			   	.delay(function(d, i) { return i * 10 + 20; })
+			   	.delay(function(d, i) { return i * 5 + 10; })
 		   .attr("r", 5)
 		   .attr("opacity", 0.5);
 
@@ -224,16 +224,12 @@ $( document ).ready(function() {
 		  		d3.selectAll('circle.work')
 		  			.transition()
 		  			.duration(500)
-		  			.delay(function(d, i) { return i * 10; })
-		  			.attr("cy", -300)
 		  			.attr("opacity", 0)
 		  			.attr("r", 0);
 
 		  		d3.selectAll('circle.relationship')
 		  			.transition()
 		  			.duration(500)
-		  			.delay(function(d, i) { return i * 10; })
-		  			 .attr("cy", -300)
 		  			.attr("opacity", 0)
 		  			.attr("r", 0);
 
@@ -245,20 +241,12 @@ $( document ).ready(function() {
 		  		d3.selectAll('circle.work')
 		  			.transition()
 		  			.duration(500)
-		  			.delay(function(d, i) { return i * 10; })
 		  			.attr("opacity", 0.5)
-		  			.attr("cy", function(d) {
-				   		return yScale(d.time_fraction);
-				   	})
 		  			.attr("r", 5);
 
 		  			d3.selectAll('circle.relationship')
 		  			.transition()
 		  			.duration(500)
-		  			.delay(function(d, i) { return i * 10; })
-				  	.attr("cy", function(d) {
-				   		return yScale(d.time_fraction);
-				   	})
 		  			.attr("opacity", 0.5)
 		  			.attr("r", 5);
 		  	}
@@ -272,33 +260,47 @@ $( document ).ready(function() {
 
 	$('#chart-chapter4').waypoint(function(direction) {
 		  	if (direction === 'down') {
+		  		// change scale
+		  		xScale.domain([241,365]);
+
+		  		
+
+		  		// change dot location by 
 		  		d3.selectAll('circle.nyc')
 		  			.transition()
 		  			.duration(500)
-		  			.delay(function(d, i) { return i * 10; })
 		  			.attr("opacity", 0.5)
-		  			.attr("cy",-300)
-		  			.attr("r", 5);
+		  			.attr("r", 0);
 		  		
 
 		  		d3.selectAll('circle.relationship')
 		  			.transition()
-		  			.duration(500)
-		  			.delay(function(d, i) { return i * 10; })
-		  			.attr("cy", function(d){
-		  			 	return yScale(d.time_fraction);
+		  			.duration(2000)
+		  			.delay(500)
+		  			.attr("cx", function(d){
+		  			 	return xScale(d.days_elapsed);
 		  			 })
 		  			.attr("opacity", 0.5)
 		  			.attr("r", 5);
 
 		  		// disappear old axis
+		  		xAxis
+                  .tickValues([241, 366])
+                  .tickFormat(function(d,i){
+					  	if (d == 241){
+					  		return "the breakup";
+					  	} else if (d === 366)
+					  		return "1st year"
+					  });
 
-		  		// change scale
+		  		
 
 			    $('#chart-chapter4').animate({"opacity": 1})
 	
 		  	} else if (direction === 'up'){
 		  		$('#chart-chapter4').animate({"opacity": 0})
+		  			xScale.domain([0,365]);
+
 
 		  			d3.selectAll('circle.nyc')
 		  			.transition()
@@ -312,13 +314,29 @@ $( document ).ready(function() {
 
 		  			d3.selectAll('circle.relationship')
 		  			.transition()
-		  			.duration(500)
+		  			.duration(2000)
 		  			.delay(function(d, i) { return i * 10; })
-				  	.attr("cy", function(d) {
-				   		return yScale(d.time_fraction);
-				   	})
+				  	.attr("cx", function(d){
+		  			 	return xScale(d.days_elapsed);
+		  			 })
 		  			.attr("opacity", 0.5)
 		  			.attr("r", 5);
+
+		  			// disappear old axis
+			  		xAxis
+	                  .tickValues([0, 183, 366])
+	                  .tickFormat(function(d,i){
+						  	if (d == 0){
+						  		return "arrival in NYC";
+						  	} else if (d === 183){
+						  		// return d + " days";	
+						  		return "first six months";						  		
+						  	} else if (d === 366)
+						  		return "1st year"
+						  });
+
+
+
 		  	}
 		}, {
 		  	offset: windowHeight/2+'px'
