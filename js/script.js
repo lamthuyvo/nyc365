@@ -87,34 +87,30 @@ $( document ).ready(function() {
 				});
 
 
-	//Create X axis
-	svg.append("g")
-		.attr("class", "x axis")
-		.attr("transform", "translate(0," + (h - padding) + ")") // makes the x-axis go on the bottom
-		.call(xAxis);
 
-	//Create Y axis
-	svg.append("g")
-	    .attr("class", "y axis")
-	    .attr("transform", "translate(" + padding + ",0)")
-	    .call(yAxis);
 
 	
 	//Y-axis label
 	var YAxisLines = d3.selectAll('.y');
+	
 
 
 	// Create circles
 	function makeGraphic (){
+
+
+
+		// circles per row
+
 		svg.selectAll("circle")
 		   .data(ambionicData)
 		   .enter()
 		   .append("circle")
-		   .attr("cx", function(d) {
-		   		return xScale(d.days_elapsed);
+		   .attr("cx", function(d,i) {
+		   		return xScale(0+i);
 		   })
-		   .attr("cy", function(d) {
-		   		return yScale(d.time_fraction);
+		   .attr("cy", function(d,i) {
+		   		return 150;
 		   })
 		   .on("mouseover", function(d) {
 				if (d.emotion === "negative"){
@@ -165,7 +161,15 @@ $( document ).ready(function() {
 		   			return mixedColor
 		   		}
 		   })
-		   .attr("class", function(d){ return d.emotion + " " + d.storyCategory})
+		   .attr("class", function(d){ 
+		   	if (d.days_elapsed > 213){
+		   		return d.emotion + " " + d.storyCategory + " breakup";
+		   	} else{
+		   		return d.emotion + " " + d.storyCategory;
+		   	}
+		   	
+
+		   })
 		   .attr("r", 0)
 			   	.transition()
 			   	.duration(5)
@@ -186,7 +190,9 @@ $( document ).ready(function() {
 	// section 1: graphic explanation 
 
 	$('#start').waypoint(function(direction) {
+
 		  	if (direction === 'down') {
+		  		
 		  		$('.chart-box').animate({"opacity":1}, 500);
 
 			    makeGraphic();
@@ -205,8 +211,6 @@ $( document ).ready(function() {
 	$('#chart-chapter2').waypoint(function(direction) {
 		  	if (direction === 'down') {
 
-
-
 			    $('#chart-chapter2').animate({"opacity": 1})
 	
 		  	} else if (direction === 'up'){
@@ -221,34 +225,35 @@ $( document ).ready(function() {
 
 	$('#chart-chapter3').waypoint(function(direction) {
 		  	if (direction === 'down') {
-		  		d3.selectAll('circle.work')
-		  			.transition()
-		  			.duration(500)
-		  			.attr("opacity", 0)
-		  			.attr("r", 0);
+		  		//Create X axis
+				svg.append("g")
+					.attr("class", "x axis")
+					.attr("transform", "translate(0," + (h - padding) + ")") // makes the x-axis go on the bottom
+					.call(xAxis);
 
-		  		d3.selectAll('circle.relationship')
+				//Create Y axis
+				svg.append("g")
+				    .attr("class", "y axis")
+				    .attr("transform", "translate(" + padding + ",0)")
+				    .call(yAxis);
+
+		  		d3.selectAll('circle')
 		  			.transition()
-		  			.duration(500)
-		  			.attr("opacity", 0)
-		  			.attr("r", 0);
+				   	.duration(5)
+				   	.delay(function(d, i) { return i * 5; })
+		  			.attr("cx", function(d) {
+			   		return xScale(d.days_elapsed);
+				   })
+				   .attr("cy", function(d) {
+				   		return yScale(d.time_fraction);
+				   })
+		  		
 
 			    $('#chart-chapter3').animate({"opacity": 1})
 	
 		  	} else if (direction === 'up'){
 		  		$('#chart-chapter3').animate({"opacity": 0})
-
-		  		d3.selectAll('circle.work')
-		  			.transition()
-		  			.duration(500)
-		  			.attr("opacity", 0.5)
-		  			.attr("r", 5);
-
-		  			d3.selectAll('circle.relationship')
-		  			.transition()
-		  			.duration(500)
-		  			.attr("opacity", 0.5)
-		  			.attr("r", 5);
+		  		
 		  	}
 		}, {
 		  	offset: windowHeight/2+'px'
@@ -268,7 +273,8 @@ $( document ).ready(function() {
 		  		// change dot location by 
 		  		d3.selectAll('circle.nyc')
 		  			.transition()
-		  			.duration(500)
+				   	.duration(5)
+				   	.delay(function(d, i) { return i * 5 + 10; })
 		  			.attr("opacity", 0.5)
 		  			.attr("r", 0);
 		  		
@@ -299,6 +305,7 @@ $( document ).ready(function() {
 	
 		  	} else if (direction === 'up'){
 		  		$('#chart-chapter4').animate({"opacity": 0})
+		  			//change back scale
 		  			xScale.domain([0,365]);
 
 
@@ -379,63 +386,6 @@ $( document ).ready(function() {
 		
 	
 
-	// make waypoints
-
-
-
-	// $('#positive').on("click", function(){
-	// 	var newRadius;
-	// 	if (d3.selectAll(".positive").attr("r") == 5){
-	// 		d3.selectAll(".positive")
-	// 			.transition()
-	// 			.duration(500)
-	// 			.attr("r", 0)
-	// 			.attr("opacity", 0.5);
-	// 	} else{
-	// 		d3.selectAll(".positive")
-	// 			.transition()
-	// 			.duration(500)
-	// 			.attr("r", 5)
-	// 			.attr("opacity", 0.5);
-	// 	}
-
-	// });
-
-	// $('#negative').on("click", function(){
-	// 	var newRadius;
-	// 	if (d3.selectAll(".negative").attr("r") == 5){
-	// 		d3.selectAll(".negative")
-	// 			.transition()
-	// 			.duration(500)
-	// 			.attr("r", 0)
-	// 			.attr("opacity", 0.5);
-	// 	} else{
-	// 		d3.selectAll(".negative")
-	// 			.transition()
-	// 			.duration(500)
-	// 			.attr("r", 5)
-	// 			.attr("opacity", 0.5);
-	// 	}
-
-	// });
-
-	// $('#mixed').on("click", function(){
-	// 	var newRadius;
-	// 	if (d3.selectAll(".mixed").attr("r") == 5){
-	// 		d3.selectAll(".mixed")
-	// 			.transition()
-	// 			.duration(500)
-	// 			.attr("r", 0)
-	// 			.attr("opacity", 0.5);
-	// 	} else{
-	// 		d3.selectAll(".mixed")
-	// 			.transition()
-	// 			.duration(500)
-	// 			.attr("r", 5)
-	// 			.attr("opacity", 0.5);
-	// 	}
-
-	// });
 
 	
 
