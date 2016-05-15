@@ -181,7 +181,10 @@ $( document ).ready(function() {
 		
 	}
 
+	makeGraphic();
 	
+
+
 
 	// section 1: graphic explanation 
 
@@ -189,9 +192,14 @@ $( document ).ready(function() {
 
 		  	if (direction === 'down') {
 		  		
-		  		$('.chart-box').animate({"opacity":1}, 500);
+		  		$('.chart-box').animate({"opacity":1}, 200);
 
-			    makeGraphic();
+		  		nodes.forEach(function(o, i) {
+				    o.x += (Math.random() - .5) * 100;
+				    o.y += (Math.random() - .5) * 100;
+			  	});
+			  	force.resume();
+							    
 
 			    $('#start').fadeOut()
 	
@@ -436,6 +444,7 @@ $( document ).ready(function() {
 			    	.attr("opacity", 0)
 	
 		  	} else if (direction === 'up'){
+		  		force.stop();
 		  		$('#chart-chapter5').animate({"opacity": 0})
 		  		$('body').animate({"background-color": "#FFF"}, 500)
 
@@ -443,31 +452,233 @@ $( document ).ready(function() {
 		  		d3.selectAll('.axis')
 			    	.transition()
 			    	.duration(500)
-			    	.attr("opacity", 1)
+			    	.attr("opacity", 1);
+
+			    xScale.domain([241,365]);
+
+			    d3.selectAll('circle')
+		  			.transition()
+		  			.duration(1000)
+		  			.attr("cx", function(d){
+		  			 	return xScale(d.days_elapsed);
+
+		  			})
+		  			.attr("cy", function(d){
+		  			 	return yScale(d.time_fraction);
+
+		  			});
 		  			
 		  	}
 		}, {
 		  	offset: windowHeight/2+'px'
 	})
 
-	// make soundcite
-	// var audio = document.getElementById("audio");
-    // audio.play();
-	
-	function danceParty(){
-		// turn background dark
+	// make function for player button
+	function playVideo(song){
 
-		// move dots down
+		var songvideo = $('#'+song);
+		var muteButton = $('#muteButton'+song);
 
-		// make repeat dancing thing (or use https://www.bignerdranch.com/blog/music-visualization-with-d3-js/)
+		$('#player'+ song).on("click", function(){
+			if (song.muted == false)if (video.muted == false) {
+			    // Mute the video
+			    song.muted = true;
+
+			    // Update the button text
+			    muteButton.innerHTML = "Unmute";
+			} else {
+			    // Unmute the video
+			    video.muted = false;
+
+			    // Update the button text
+			    muteButton.innerHTML = "Mute";
+			}
+		})
+
 	}
 
-	// section 6: jameel 
+	var timer_ret_val = false;
 
-	// section 7: dancing on my own
+	function timer(){
+		d3.timer(function(){
 
+  			nodes.forEach(function(o, i) {
+			    o.x += (Math.random() - .5) * 10;
+			    o.y += (Math.random() - .5) * 10;
+		  	});
+		  	force.resume();
+
+		  	return timer_ret_val;
+
+  		});
+
+	} 
+	// section 6: problem
+	$('#chart-chapter6').waypoint(function(direction) {
+		  	if (direction === 'down') {
+		  		timer_ret_val = false;
+		  		timer();
+
+		  		$("#problem").get(0).play();
+			    $('#chart-chapter6').animate({"opacity": 1})
+
+			    d3.selectAll('circle.positive')
+			    	.transition()
+			    	.duration(500)
+			    	.attr("opacity",0)
+
+			    d3.selectAll('circle.mixed')
+			    	.transition()
+			    	.duration(500)
+			    	.attr("opacity",0)
+
+			  
+
+
+			   	
+	
+		  	} else if (direction === 'up'){
+
+		  		force.stop();
+		  		timer_ret_val = true;
+
+
+
+		  		$('#chart-chapter6').animate({"opacity": 0})
+		  		$("#problem").get(0).pause();
+		  
+
+		  		d3.selectAll('circle.positive')
+		  			.transition()
+			    	.duration(500)
+			    	.attr("opacity",0.5)
+
+			    d3.selectAll('circle.mixed')
+					.transition()
+			    	.duration(500)
+			    	.attr("opacity",0.5)
+
+
+		  			
+		  	}
+		}, {
+		  	offset: windowHeight/2+'px'
+	})
+
+	// section 7: bulletproof
+	$('#chart-chapter7').waypoint(function(direction) {
+		  	if (direction === 'down') {
+
+		  		$("#problem").get(0).pause();
+		  		$("#bulletproof").get(0).play();
+
+
+
+		  		d3.selectAll('circle.mixed')
+			    	.transition()
+			    	.duration(500)
+			    	.attr("opacity",0.5)
+
+			    d3.selectAll('circle.negative')
+			    	.transition()
+			    	.duration(500)
+			    	.attr("opacity",0)
+		  		
+			    $('#chart-chapter7').animate({"opacity": 1})
 
 	
+		  	} else if (direction === 'up'){
+		  		$('#chart-chapter7').animate({"opacity": 0})
+		  		$("#bulletproof").get(0).pause();
+
+		  		d3.selectAll('circle.mixed')
+			    	.transition()
+			    	.duration(500)
+			    	.attr("opacity",0)
+
+			    d3.selectAll('circle.negative')
+			    	.transition()
+			    	.duration(500)
+			    	.attr("opacity",0.5)
+		  			
+		  	}
+		}, {
+		  	offset: windowHeight/2+'px'
+	})
+
+	// section 8: feisty
+	$('#chart-chapter8').waypoint(function(direction) {
+		  	if (direction === 'down') {
+
+		  		$("#bulletproof").get(0).pause();
+		  		$("#feisty").get(0).play();
+
+		  		d3.selectAll('circle.positive')
+			    	.transition()
+			    	.duration(500)
+			    	.attr("opacity",0.5)
+
+			    d3.selectAll('circle.mixed')
+			    	.transition()
+			    	.duration(500)
+			    	.attr("opacity",0)
+
+		  		
+			    $('#chart-chapter8').animate({"opacity": 1})
+
+	
+		  	} else if (direction === 'up'){
+		  		$('#chart-chapter8').animate({"opacity": 0})
+		  		$("#feisty").get(0).pause();
+
+		  		d3.selectAll('circle.positive')
+			    	.transition()
+			    	.duration(500)
+			    	.attr("opacity",0)
+
+			    d3.selectAll('circle.mixed')
+			    	.transition()
+			    	.duration(500)
+			    	.attr("opacity",0.5)
+		  			
+		  	}
+		}, {
+		  	offset: windowHeight/2+'px'
+	})
+
+	
+
+	// chapter 9
+
+	
+	// section 8: feisty
+	$('#chart-chapter9').waypoint(function(direction) {
+		  	if (direction === 'down') {
+
+		  		$('body').animate({"background-color": "#FFF"}, 500)
+
+		  		d3.selectAll('circle.positive')
+			    	.transition()
+			    	.duration(500)
+			    	.attr("opacity",0)
+		  		
+			    $('#chart-chapter9').animate({"opacity": 1})
+
+	
+		  	} else if (direction === 'up'){
+		  		$('#chart-chapter9').animate({"opacity": 0})
+		  		$('body').animate({"background-color": "#000"}, 500)
+
+		  		d3.selectAll('circle.positive')
+			    	.transition()
+			    	.duration(500)
+			    	.attr("opacity",0.5)
+		  		
+		  			
+		  	}
+		}, {
+		  	offset: windowHeight/2+'px'
+	})
 		
 	
 
