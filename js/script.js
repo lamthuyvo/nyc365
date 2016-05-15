@@ -275,6 +275,7 @@ $( document ).ready(function() {
 		  		// change scale
 		  		xScale.domain([241,365]);
 
+
 		  		// disappear old axis
 		  		d3.selectAll(".x")
 		  			.transition()
@@ -299,7 +300,7 @@ $( document ).ready(function() {
 					.attr("class", "x2 axis")
 					.attr("transform", "translate(0," + (h - padding) + ")") // makes the x-axis go on the bottom
 					.call(xAxis2);
-
+ 
 		  		// change dot location by 
 		  		d3.selectAll('circle.nyc')
 		  			.transition()
@@ -320,6 +321,22 @@ $( document ).ready(function() {
 				   	.duration(300)
 		  			.attr("opacity", 0.5)
 		  			.attr("r", 0);
+
+		  		// change dot location by 
+		  		d3.selectAll('circle.none')
+		  			.transition()
+				   	.duration(5)
+				   	.delay(function(d, i) { return i * 5 + 10; })
+		  			.attr("opacity", 0.5)
+		  			.attr("r", 0);
+
+		  		// change dot location by 
+		  		d3.selectAll('circle.work')
+		  			.transition()
+				   	.duration(5)
+				   	.delay(function(d, i) { return i * 5 + 10; })
+		  			.attr("opacity", 0.5)
+		  			.attr("r", 0)
 		  		
 
 		  		d3.selectAll('circle.relationship')
