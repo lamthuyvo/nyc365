@@ -194,7 +194,7 @@ a {
 
 .section{
 	position:relative;
-	pointer-events: none;
+	/*pointer-events: none;*/
 }
 
 
@@ -328,7 +328,9 @@ a {
 .y.axis line,
 .y.axis path,
 .x.axis line,
-.x.axis path {
+.x.axis path,
+.x2.axis line,
+.x2.axis path {
   fill: none;
   stroke: #ccc;
 }
