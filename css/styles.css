@@ -366,6 +366,9 @@ video{
     margin-top: 2px;
     margin-right: 5px;
     display: inline-block;
+    stroke-width: 1px;
+    stroke: #fff;
+
 }
 
 .hover{
@@ -411,3 +414,50 @@ video{
 }
 
 
+/*table styles*/
+.songtable{
+    min-width: 300px;
+}
+
+.songtableheader th {
+    color: #b84ab4;
+    border-bottom: 1px solid #ccc;
+    padding: 5px 10px 5px 0px;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+.songtablebody td {
+    padding: 15px 10px 10px 0px;
+    text-align: left;
+    color: #37424A;
+    font-size: 0.9em;
+    line-height: 1.4em;
+}
+
+#chart-chapter9{
+    pointer-events:all;
+}
+
+@media (max-width:768px){
+    .songtableheader th {
+        font-size: 0.8em;
+        text-align: center;
+    }
+    .songtablebody td {
+        font-size: 0.8em;
+        padding: 15px 5px 10px 0px;
+        text-align: center;
+    }
+}
+
+@media (max-width:400px){
+    .songtableheader th {
+        font-size: 0.6em;
+
+    }
+    .songtablebody td {
+        font-size: 0.6em;
+        
+    }
+}

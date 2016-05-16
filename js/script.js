@@ -654,6 +654,7 @@ $( document ).ready(function() {
 	// section 8: feisty
 	$('#chart-chapter9').waypoint(function(direction) {
 		  	if (direction === 'down') {
+		  		$("#feisty").get(0).pause();
 
 		  		$('body').animate({"background-color": "#FFF"}, 500)
 
