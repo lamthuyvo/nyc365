@@ -439,6 +439,19 @@ video{
     pointer-events:all;
 }
 
+/*share buttons*/
+
+.share-buttons {
+    position: fixed;
+    width: 100%;
+    z-index:999;
+}
+
+.share-buttons li {
+    float: right;
+    padding: 10px 3px 10px 2px;
+}
+
 @media (max-width:768px){
     .songtableheader th {
         font-size: 0.8em;
