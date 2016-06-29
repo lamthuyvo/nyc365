@@ -64,6 +64,58 @@ i{
 
 /* Your styles go here */
 
+/*Forms*/
+#qs-submit-page{
+    display: none;
+    text-align: center;
+}
+
+.ss-q-title {
+    color: #393939;
+    line-height: 1.5em;
+   /* margin: 20px 0px 0px 0px;*/
+}
+
+.ss-q-help.ss-secondary-text {
+    font-size: 0.9em;
+    line-height: 1.2em;
+    margin: 10px 0px 5px 0px;
+
+}
+
+input#entry_212991863 {
+    height: 2em;
+    margin: 5px 0px 20px 0px;
+    width: 100%
+}
+
+textarea#entry_1562626231 {
+    width: 100%;
+    margin: 15px 0px 10px 0px;
+    border: 1px #ccc solid;
+    height:100px;
+
+}
+
+input#ss-submit {
+  -webkit-border-radius: 10;
+  -moz-border-radius: 10;
+  border-radius: 5px;
+  font-family: 'Oswald', Helvetica, Arial, sans-serif;
+  color: #ffffff;
+  font-size: 15px;
+  background: #9e9e9e;
+  padding: 5px 15px 5px 15px;
+  text-decoration: none;
+  border:none;
+  margin:15px 0px;
+}
+
+input#ss-submit:hover {
+  background: #c7c7c7;
+  text-decoration: none;
+}
+
 /*colors*/
 
 .yellow1{color:#342a03;}

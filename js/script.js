@@ -208,7 +208,7 @@ $( document ).ready(function() {
 		  	}
 		}, {
 		  	offset: '0px'
-	})
+	});
 
 
 	// section 2: highlight happy, mixed and sad
@@ -684,7 +684,11 @@ $( document ).ready(function() {
 	
 
 
-	
+	// googleform
+	$('#ss-form').submit( function(){
+	   $(this).hide();
+	   $('#qs-submit-page').show();
+	});
 
 
 	
